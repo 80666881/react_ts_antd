@@ -1,11 +1,18 @@
-import React, { useState, useEffect,useRef } from 'react'
+import React, { useState, useEffect,useRef, useContext } from 'react'
 import useMousePosition from '../hooks/useMousePosition'
+import {ThemeContext} from '../App'
 const LikeButton: React.FC = () => {
     const [like, setLike] = useState(0)
     const [on, setOn] = useState(false)
     const likeRef = useRef(0)
     const didMoutRef = useRef(false)
     const domRef = useRef<HTMLInputElement>(null)
+    const theme = useContext(ThemeContext)
+    console.log('theme',theme);
+    const style = {
+        background:theme.background,
+        color:theme.color
+    }
     useEffect(() => {
         console.log('like Button effect is running');
         //告诉react渲染后执行哪些操作
@@ -25,7 +32,7 @@ const LikeButton: React.FC = () => {
     })
     return (
         <>
-            <button onClick={() => {setLike(like + 1);likeRef.current++}}>
+            <button style={style} onClick={() => {setLike(like + 1);likeRef.current++}}>
                 {like}赞
             </button>
             <input type="text" ref={domRef}/>
