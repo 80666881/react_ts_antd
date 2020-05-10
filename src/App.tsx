@@ -2,27 +2,16 @@ import React, { useState } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import Hello from './components/Hello'
-import Like from './components/LikeButton'
-import MouseTracker from './components/MouseTracker'
-import useMousePosition from './hooks/useMousePosition'
-import withLoader from './hoc/withLoader'
-
+import useURLLoader from './hooks/useURLLoader'
 interface IShowResult{
   message:string;
   status:string;
 }
-const DogShow:React.FC<{data:IShowResult}> = ({data})=>{
-  return (
-    <>
-    <h2>Dog show:{data.status}</h2>
-    <img src={data.message} alt=""/>
-    </>
-  )
-}
+
 function App() {
   const [show, setShow] = useState(true)
-  // const positions = useMousePosition()
-  const WrappedDogShow = withLoader(DogShow,'https://dog.ceo/api/breeds/image/random')
+  const [data,loading] = useURLLoader('https://dog.ceo/api/breeds/image/random')
+  const dogResult = data as IShowResult
   return (
     <div className="App">
       <header className="App-header">
@@ -31,8 +20,9 @@ function App() {
           <button onClick={()=>{setShow(!show)}}>Toggle Tracker</button>
         </p>
         <Hello></Hello>
-        <WrappedDogShow></WrappedDogShow>
-        {/* <Like></Like> */}
+        {loading?<p>狗 读取中</p>:
+          <img src={dogResult.message} alt=''></img>
+        }
         <a
           className="App-link"
           href="https://reactjs.org"
