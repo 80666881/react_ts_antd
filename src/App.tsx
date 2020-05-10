@@ -3,10 +3,12 @@ import logo from './logo.svg';
 import './App.css';
 import Hello from './components/Hello'
 import useURLLoader from './hooks/useURLLoader'
+import Like from './components/LikeButton'
 interface IShowResult{
   message:string;
   status:string;
 }
+
 
 function App() {
   const [show, setShow] = useState(true)
@@ -18,6 +20,8 @@ function App() {
         <img src={logo} className="App-logo" alt="logo" />
         <p>
           <button onClick={()=>{setShow(!show)}}>Toggle Tracker</button>
+          <br/>
+          <Like></Like>
         </p>
         <Hello></Hello>
         {loading?<p>狗 读取中</p>:

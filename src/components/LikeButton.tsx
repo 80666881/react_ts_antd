@@ -11,10 +11,10 @@ const LikeButton: React.FC = () => {
     },[like])
     return (
         <>
-            <p>X:___{positions.x},Y_____{positions.y}</p>
             <button onClick={() => setLike(like + 1)}>
                 {like}赞
             </button>
+            <button onClick={()=>setTimeout(()=>{alert(like)},1000)}>Alert</button>
             <button onClick={() => setOn(!on)}>
                 {on?'on':'off'}
             </button>
