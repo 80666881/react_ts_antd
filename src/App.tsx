@@ -4,8 +4,10 @@ import './App.css';
 import Hello from './components/Hello'
 import Like from './components/LikeButton'
 import MouseTracker from './components/MouseTracker'
+import useMousePosition from './hooks/useMousePosition'
 function App() {
   const [show, setShow] = useState(true)
+  const positions = useMousePosition()
   return (
     <div className="App">
       <header className="App-header">
@@ -14,8 +16,8 @@ function App() {
           <button onClick={()=>{setShow(!show)}}>Toggle Tracker</button>
         </p>
         <Hello></Hello>
+        <p>X:{positions.x},Y:{positions.y}</p>
         <Like></Like>
-        {show && <MouseTracker />}
         <a
           className="App-link"
           href="https://reactjs.org"

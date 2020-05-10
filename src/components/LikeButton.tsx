@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react'
-
+import useMousePosition from '../hooks/useMousePosition'
 const LikeButton: React.FC = () => {
     const [like, setLike] = useState(0)
     const [on, setOn] = useState(false)
+    const positions = useMousePosition()
     useEffect(() => {
         console.log('like Button effect is running');
         //告诉react渲染后执行哪些操作
@@ -10,6 +11,7 @@ const LikeButton: React.FC = () => {
     },[like])
     return (
         <>
+            <p>X:___{positions.x},Y_____{positions.y}</p>
             <button onClick={() => setLike(like + 1)}>
                 {like}赞
             </button>
